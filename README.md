@@ -1,13 +1,13 @@
 # MinecraftPython
 
-Minecraft на Python, а так-же улучшенная версия двух репозиториев:
+Minecraft на Python, а також покращена версія двох репозиторіїв:
 
 https://github.com/clear-code-projects/Minecraft-in-Python/blob/main/UrsaCraft_video.py
 
 https://github.com/kairess/minecraft-clone
 
-Музыка в игре: https://www.youtube.com/watch?v=DZ47H84Bc_Q&ab_channel=InfernalEntertain
+Музика: https://www.youtube.com/watch?v=DZ47H84Bc_Q&ab_channel=InfernalEntertain
 
-Документация на библиотеку: https://www.ursinaengine.org/documentation.html
+Документація на бібліотеку: https://www.ursinaengine.org/documentation.html
 
-P.S. music.wav не вместился в репозиторий,поэтому он лежит в music.rar
+P.S. music.wav не умістився в репозиторій, тому він лежить у music.rar
