@@ -6,18 +6,18 @@ import random
 
 app = Ursina()
 
+window.set_title("Minecraft")
 window.fps_counter.enabled = True
-window.exit_button.visible = False
+window.exit_button.visible = True
 
 punch = Audio('assets/punch')
 
 music = Audio('assets/music')
 music.play()
-
 camera.ui_size = 40
 
-health_bar_1 = HealthBar(
-    max_value=300,
+health_bar_character = HealthBar(
+    max_value=100,
     bar_color=color.lime.tint(-.25),
     roundness=.5,
     value=50,
@@ -35,14 +35,21 @@ player = FirstPersonController(
     gravity = 0.5,
     jump_height = 1,
     air_time = 0,
-    height = 2,
+    height = 1,
 )
 
+#Blocks for random spawning
+blocks_random = [
+    'assets/stone.png',
+    'assets/gold.png',
+]
+
+#All blocs
 blocks = [
     load_texture('assets/grass.png'), # 0
     load_texture('assets/grass.png'), # 1
-    load_texture('assets/stone.png'), # 2
-    load_texture('assets/gold.png'),  # 3
+    load_texture(blocks_random[0]), # 2
+    load_texture(blocks_random[1]),  # 3
     load_texture('assets/lava.png'),  # 4
     load_texture('assets/dirt_block.png'), #5
     load_texture('assets/brick_block.png')  #6
@@ -85,13 +92,13 @@ def update():
     else:
         hand.position = Vec2(0.6, -0.6)
 
-    if health_bar_1.value == 0:
+    if health_bar_character.value == 0:
         descr = dedent('<red>You dead\n' + '<red>Try again?')
         Text.default_resolution = 1080 * Text.size
         Text(text=descr, origin=(0, -5), background=True)
 
     if player.y < -1:
-        health_bar_1.value -= 1
+        health_bar_character.value -= 1
 
 
 class Voxel(Button):
@@ -113,24 +120,20 @@ class Voxel(Button):
             elif key == 'right mouse down':
                 Voxel(position=self.position + mouse.normal, texture=blocks[block_id])
 
-for z in range(random.randint(15,20)):
-    for x in range(random.randint(7,20)):
+for z in range(20):
+    for x in range(20):
         grass = Voxel(position=(x, 8, z), texture='assets/grass.png')
 
-for z in range(random.randint(7,20)):
-    for x in range(random.randint(7,20)):
-        for y in range(1,2):
-            underground = Voxel(position=(x, y, z), texture='assets/gold.png')
-
-for z in range(random.randint(7,20)):
-    for x in range(random.randint(7,20)):
-        for y in range(2,5):
-            stone = Voxel(position=(x, y, z), texture='assets/stone.png')
-
-for z in range(random.randint(10,20)):
-    for x in range(random.randint(7,20)):
+for z in range(20):
+    for x in range(20):
         for y in range(5,8):
             dirt = Voxel(position=(x, y, z), texture='assets/dirt_block.png')
+
+for z in range(20):
+    for x in range(20):
+        for y in range(1,5):
+            texture_choice = random.choice(blocks_random)
+            stone = Voxel(position=(x, y, z), texture=texture_choice)
 
 if __name__ == "__main__":
     app.run()
